@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
-@Repository
+@Service
 public class ProductDaoImpl implements ProductDao {
 
     public static List<Product> products = new ArrayList<>();
@@ -23,17 +23,18 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public Product findById(int id) {
+
         for(Product product:products){
             if(product.getId() == id){
                 return product;
             }
         }
-        return null;
+        return new MessageResponse("Le produit n'a pas ete trouve");
     }
 
     @Override
     public Product save(Product p) {
-        products.add(p);
-        return p;
+       
+        return  products.add(p);
     }
 }
