@@ -23,15 +23,15 @@ public class ProductController {
     }
 
     @GetMapping("/Products")
-    public MappingJacksonValue getProducts() {
-        List<Product> products = productDao.findAll();
+    public ResponseEntity<?> getProducts() {
+       // List<Product> products = productDao.findAll();
 
-        SimpleBeanPropertyFilter myFilter = SimpleBeanPropertyFilter.serializeAllExcept("purchasePrice");
+       /* SimpleBeanPropertyFilter myFilter = SimpleBeanPropertyFilter.serializeAllExcept("purchasePrice");
         FilterProvider filterLists = new SimpleFilterProvider().addFilter("myDynamicFilter", myFilter);
 
         MappingJacksonValue filterProducts = new MappingJacksonValue(products);
-        filterProducts.setFilters(filterLists);
-        return filterProducts;
+        filterProducts.setFilters(filterLists);*/
+        return productDao.findAll();// return tab d'objet 
     }
 
     @GetMapping("/Products/{id}")
@@ -40,17 +40,9 @@ public class ProductController {
     }
 
     @PostMapping("/Products")
-    public ResponseEntity<Product> AddProduct(@RequestBody Product product) {
+    public ResponseEntity<Product> AddProduct(@Valid @RequestBody Product product) {
         Product productAdded = productDao.save(product);
-        if (Objects.isNull(productAdded)) {
-            return ResponseEntity.noContent().build();
-        }
-        URI location = ServletUriComponentsBuilder
-                .fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(productAdded.getId())
-                .toUri();
-        return ResponseEntity.created(location).build();
+        return ResponseEntity.ok().body(productAdded); // la reponse qui est OK Unauthorized ou Not found, body ou tu peux mettre la donnee que tu veux renvoyer
     }
 
 }
