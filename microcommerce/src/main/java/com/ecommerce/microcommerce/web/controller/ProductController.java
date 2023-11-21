@@ -2,17 +2,9 @@ package com.ecommerce.microcommerce.web.controller;
 
 import com.ecommerce.microcommerce.dao.ProductDao;
 import com.ecommerce.microcommerce.model.Product;
-import com.fasterxml.jackson.databind.ser.FilterProvider;
-import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
-import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.json.MappingJacksonValue;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
-import java.net.URI;
-import java.util.List;
-import java.util.Objects;
 
 @RestController
 public class ProductController {
@@ -24,14 +16,8 @@ public class ProductController {
 
     @GetMapping("/Products")
     public ResponseEntity<?> getProducts() {
-       // List<Product> products = productDao.findAll();
-
-       /* SimpleBeanPropertyFilter myFilter = SimpleBeanPropertyFilter.serializeAllExcept("purchasePrice");
-        FilterProvider filterLists = new SimpleFilterProvider().addFilter("myDynamicFilter", myFilter);
-
-        MappingJacksonValue filterProducts = new MappingJacksonValue(products);
-        filterProducts.setFilters(filterLists);*/
-        return productDao.findAll();// return tab d'objet 
+        //return productDao.findAll();// return tab d'objet
+        return  ResponseEntity.ok().body(productDao.findAll());// return a http response
     }
 
     @GetMapping("/Products/{id}")
@@ -40,9 +26,9 @@ public class ProductController {
     }
 
     @PostMapping("/Products")
-    public ResponseEntity<Product> AddProduct(@Valid @RequestBody Product product) {
+    public ResponseEntity<Product> AddProduct(@Validated @RequestBody Product product) {//replace Valid with Validated because I don't find Valid
         Product productAdded = productDao.save(product);
-        return ResponseEntity.ok().body(productAdded); // la reponse qui est OK Unauthorized ou Not found, body ou tu peux mettre la donnee que tu veux renvoyer
+        return ResponseEntity.ok().body(productAdded); // la response qui est OK Unauthorized ou Not found, body ou tu peux mettre la donnee que tu veux renvoyer
     }
 
 }

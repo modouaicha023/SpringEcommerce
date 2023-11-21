@@ -1,7 +1,7 @@
 package com.ecommerce.microcommerce.dao;
 
 import com.ecommerce.microcommerce.model.Product;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,12 +29,13 @@ public class ProductDaoImpl implements ProductDao {
                 return product;
             }
         }
-        return new MessageResponse("Le produit n'a pas ete trouve");
+        return null;
     }
 
     @Override
     public Product save(Product p) {
-       
-        return  products.add(p);
+        products.add(p);
+        return p; //should  return the product
+//        return  products.add(p);
     }
 }
