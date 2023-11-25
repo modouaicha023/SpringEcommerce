@@ -1,6 +1,7 @@
 package com.ecommerce.microcommerce.web.controller;
 
 import com.ecommerce.microcommerce.dao.ProductDao;
+import com.ecommerce.microcommerce.dto.ProductDto;
 import com.ecommerce.microcommerce.model.Product;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,9 +39,9 @@ public class ProductController {
     }
 
     @PostMapping("/Products")
-    public ResponseEntity<?> addProduct(@Validated @RequestBody Product product) {// replace Valid with Validated
+    public ResponseEntity<?> addProduct(@Validated @RequestBody ProductDto productDto) {// replace Valid with Validated
                                                                                   // because I don't find Valid
-        Product productAdded = productDao.save(product);
+        Product productAdded = productDao.save(productDto);
         return ResponseEntity.ok().body(productAdded); // la response qui est OK
         // Unauthorized ou Not found, body ou tu peux mettre la donnee que tu veux
         // renvoyer
