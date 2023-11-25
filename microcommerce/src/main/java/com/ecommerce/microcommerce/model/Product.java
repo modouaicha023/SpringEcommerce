@@ -1,30 +1,44 @@
 package com.ecommerce.microcommerce.model;
 
+import jakarta.persistence.Column;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
+import jakarta.persistence.Entity;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.GeneratedValue;
+import java.lang.Integer;
+@Entity
 public class Product {
-    private int id;
+    @Id
+    // @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
+
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "price")
     private int price;
-    @JsonIgnore
-    private int purchasePrice;
+
+    @Column(name = "purchaseprice")
+    // @JsonIgnore
+    private int purchaseprice;
 
     public Product() {
     }
 
-    public Product(int id, String name, int price,int purchasePrice) {
+    public Product(int id, String name, int price, int purchaseprice) {
         this.id = id;
         this.name = name;
         this.price = price;
-        this.purchasePrice = purchasePrice;
+        this.purchaseprice = purchaseprice;
     }
 
-
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -44,14 +58,13 @@ public class Product {
         this.price = price;
     }
 
-    public int getPurchasePrice() {
-        return purchasePrice;
+    public int getPurchaseprice() {
+        return purchaseprice;
     }
 
-    public void setPurchasePrice(int purchasePrice) {
-        this.purchasePrice = purchasePrice;
+    public void setPurchaseprice(int purchaseprice) {
+        this.purchaseprice = purchaseprice;
     }
-
 
     @Override
     public String toString() {

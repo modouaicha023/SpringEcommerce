@@ -4,8 +4,11 @@ import com.ecommerce.microcommerce.model.Product;
 
 import java.util.List;
 
-public interface ProductDao {
-    List<Product> findAll();
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface ProductDao extends JpaRepository<Product, Integer> {
     Product findById(int id);
-    Product save(Product p);
+    List<Product> findByPriceGreaterThan(int limitPrice);
 }
