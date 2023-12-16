@@ -2,7 +2,6 @@ package com.ecommerce.microcommerce.web.controller;
 
 import java.util.List;
 
-import org.apache.catalina.User;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,6 +16,7 @@ import com.ecommerce.microcommerce.dao.UserDao;
 import com.ecommerce.microcommerce.dto.UserDto;
 import com.ecommerce.microcommerce.model.Product;
 import com.ecommerce.microcommerce.service.UserService;
+import com.ecommerce.microcommerce.model.User;
 
 @RestController
 public class UserController {
@@ -35,9 +35,14 @@ public class UserController {
         return ResponseEntity.ok().body(products);
     }
 
+    @GetMapping("/profile/{id}")
+    public User  getUserById(@PathVariable int id) {
+        return UserDao.findById(id);
+    }
+
     @PostMapping("/sign-up")
     public ResponseEntity<?> addUser(@Validated @RequestBody UserDto userDto) {// replace Valid with Validated
-        User userAdded = (User) userService.createUser(userDto);
+        User userAdded = userService.createUser(userDto);
         return ResponseEntity.ok().body(userAdded);
     }
 
