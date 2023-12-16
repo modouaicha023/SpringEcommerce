@@ -1,17 +1,11 @@
-package com.ecommerce.microcommerce.model;
+package com.ecommerce.microcommerce.dto;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.GeneratedValue;
-import java.lang.Integer;
 import java.util.List;
 
-@Entity
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+import com.ecommerce.microcommerce.model.Product;
+
+public class UserDto {
+
     private Integer id;
 
     private String firstName;
@@ -22,16 +16,14 @@ public class User {
 
     private String password;
 
-    @OneToMany(mappedBy = "user")
     private List<Product> products;
 
-    public User() {
+    public UserDto() {
     }
 
-    public User(Integer id, String firstName, String lastName, String username, String password,
+    public UserDto(Integer id, String firstName, String lastName, String username, String password,
             List<Product> products) {
         this.id = id;
-        
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;

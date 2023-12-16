@@ -1,7 +1,6 @@
 package com.ecommerce.microcommerce.model;
 
 import jakarta.persistence.Column;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GenerationType;
