@@ -31,7 +31,7 @@ public class UserController {
 
     @GetMapping("/{user_id}/products")
     public ResponseEntity<?> getUserProducts(@PathVariable int user_id) {
-        List<Product> products = UserDao.findProducts(user_id);
+        List<Product> products = UserDao.findProductsById(user_id);
         return ResponseEntity.ok().body(products);
     }
 

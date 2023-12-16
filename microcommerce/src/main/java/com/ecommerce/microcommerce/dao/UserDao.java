@@ -10,5 +10,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserDao extends JpaRepository<User, Integer> {
     // User findById(int id);
-    List<Product> findProducts(int userId);
+    List<Product> findProductsById(int userId);
 }
